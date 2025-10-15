@@ -5,8 +5,8 @@ Your repository is ready! Follow these steps to push to GitHub:
 ## Step 1: Create a new repository on GitHub
 
 1. Go to https://github.com/new
-2. Repository name: `rct-randomisation` (or your preferred name)
-3. Description: `RCT facility randomization tool with LGA stratification`
+2. Repository name: `rct-dual-stratification`
+3. Description: `RCT facility randomization tool with dual stratification (LGA + Volume)`
 4. Choose Public or Private
 5. **DO NOT** initialize with README, .gitignore, or license (we already have these)
 6. Click "Create repository"
@@ -18,20 +18,18 @@ After creating the repository, run these commands in Terminal:
 ```bash
 cd "/Users/skhsa/Desktop/RCT randomisation"
 
-# Add your GitHub repository as remote (replace USERNAME with your GitHub username)
-git remote add origin https://github.com/USERNAME/rct-randomisation.git
+# Add your GitHub repository as remote
+git remote add origin https://github.com/sammyd97/rct-dual-stratification.git
 
 # Push to GitHub
 git branch -M main
 git push -u origin main
 ```
 
-**Replace `USERNAME` with your actual GitHub username!**
-
 ## Alternative: If you have SSH set up
 
 ```bash
-git remote add origin git@github.com:USERNAME/rct-randomisation.git
+git remote add origin git@github.com:sammyd97/rct-dual-stratification.git
 git branch -M main
 git push -u origin main
 ```
