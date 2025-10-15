@@ -38,8 +38,10 @@ git push -u origin main
 
 ## What's included in this repository:
 
-✅ `randomize_facilities.py` - Main randomization script  
+✅ `randomize_facilities.py` - Main randomization script (supports dual stratification)  
 ✅ `README.md` - Complete documentation  
+✅ `Benue_randomised.csv` - Example dual-stratified results (LGA + Volume)  
+✅ `Benue_balance_report.csv` - Example balance report  
 ✅ `.gitignore` - Git ignore rules  
 
 Ready to use with your own data!

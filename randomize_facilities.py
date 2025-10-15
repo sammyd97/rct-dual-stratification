@@ -54,7 +54,7 @@ def parse_arguments():
     )
     parser.add_argument(
         "--stratify-by", type=str, default=None,
-        help="Optional: column name to stratify randomization by (e.g., LGA)"
+        help="Optional: comma-separated column names to stratify by (e.g., LGA,Volume_Group)"
     )
     return parser.parse_args()
 
@@ -85,9 +85,12 @@ def validate_inputs(arms, ratio, df, report_cols, stratify_by):
         if missing_cols:
             raise ValueError(f"Report columns not found in data: {missing_cols}")
     
-    # Check stratification column exists
-    if stratify_by and stratify_by not in df.columns:
-        raise ValueError(f"Stratification column '{stratify_by}' not found in data")
+    # Check stratification columns exist
+    if stratify_by:
+        stratify_cols = [col.strip() for col in stratify_by.split(',')]
+        missing_cols = set(stratify_cols) - set(df.columns)
+        if missing_cols:
+            raise ValueError(f"Stratification columns not found in data: {missing_cols}")
 
 
 def perform_randomization(df, arms, ratio, seed, stratify_by=None):
@@ -116,11 +119,15 @@ def perform_randomization(df, arms, ratio, seed, stratify_by=None):
         return _randomize_group(df, df.index, arms, ratio, rng)
     
     # Stratified randomization
-    print(f"\n=== Stratified Randomization by {stratify_by} ===")
+    stratify_cols = [col.strip() for col in stratify_by.split(',')]
+    print(f"\n=== Stratified Randomization by {', '.join(stratify_cols)} ===")
     
-    strata = df[stratify_by].unique()
+    # Create combined strata
+    df['_stratum'] = df[stratify_cols].apply(lambda x: ' | '.join(x.astype(str)), axis=1)
+    strata = df['_stratum'].unique()
+    
     for stratum in sorted(strata):
-        stratum_indices = df[df[stratify_by] == stratum].index
+        stratum_indices = df[df['_stratum'] == stratum].index
         stratum_size = len(stratum_indices)
         
         # Randomize within this stratum
@@ -138,6 +145,8 @@ def perform_randomization(df, arms, ratio, seed, stratify_by=None):
             print(f"{arm}={count}", end=" ")
         print()
     
+    # Clean up temporary column
+    df_output = df_output.drop('_stratum', axis=1, errors='ignore')
     print()
     
     return df_output

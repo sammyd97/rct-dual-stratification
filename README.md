@@ -1,6 +1,6 @@
 # RCT Facility Randomization Tool
 
-This Python script performs reproducible randomization of facilities for Randomized Controlled Trials (RCTs) without stratification, and generates balance diagnostics.
+This Python script performs reproducible randomization of facilities for Randomized Controlled Trials (RCTs) with optional stratification (single or multiple variables), and generates balance diagnostics.
 
 ## Quick Start
 
