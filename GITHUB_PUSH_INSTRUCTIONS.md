@@ -38,11 +38,9 @@ git push -u origin main
 
 ✅ `randomize_facilities.py` - Main randomization script (supports dual stratification)  
 ✅ `README.md` - Complete documentation  
-✅ `Benue_randomised.csv` - Example dual-stratified results (LGA + Volume)  
-✅ `Benue_balance_report.csv` - Example balance report  
-✅ `.gitignore` - Git ignore rules  
+✅ `.gitignore` - Git ignore rules (excludes data files for privacy)  
 
-Ready to use with your own data!
+Ready to use with your own data! (Data files are kept private and not included in the repository)
 
 ---
 
